@@ -2,6 +2,7 @@ const helper = require('sendgrid').mail;
 const template = require('mustache');
 const fs = require('fs');
 const sg = require('sendgrid')(process.env.SendgridApi);
+const tracker = require('trackit');
 
 var lib = {};
 
@@ -16,6 +17,17 @@ lib.prepareContext = (data)=>{
     }catch(ex){
       reject(ex);
     }
+  });
+}
+
+lib.prepareTracker = (data)=>{
+  return new Promise((fullfill,reject)=>{
+    tracker()
+      .then((id)=>{
+        data.trackerId = id;
+        fullfill(data);
+      })
+      .catch(reject);
   });
 }
 

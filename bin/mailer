@@ -6,6 +6,7 @@ const kue = require('kue'),
 queue.process('email',(job,done)=>{
   mailer
     .prepareContext(job.data)
+    .then(mailer.prepareTracker)
     .then(mailer.prepareMail)
     .then(mail.send)
     .then((data)=>{
