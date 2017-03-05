@@ -1,0 +1,21 @@
+require('dotenv').load();
+const mailer = require('../helper/mailer');
+const kue = require('kue'),
+  queue   = kue.createQueue();
+
+queue.process('email',(job,done)=>{
+  mailer
+    .prepareContext(job.data)
+    .then(mailer.prepareMail)
+    .then(mail.send)
+    .then((data)=>{
+      console.log(data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+});
+
+queue.on('error',(err)=>{
+  console.log(err);
+});
