@@ -1,13 +1,15 @@
-const helper = require('sendgrid').mail;
-const template = require('mustache');
-const fs = require('fs');
-const sg = require('sendgrid')(process.env.SendgridApi);
-const tracker = require('trackit');
+var helper = require('sendgrid').mail;
+var template = require('mustache');
+var fs = require('fs');
+var sg = require('sendgrid')(process.env.SendgridApi);
+var tracker = require('trackit');
+
+var Promise = global.promise;
 
 var lib = {};
 
-lib.prepareContext = (data)=>{
-  return new Promise((fullfill,reject)=>{
+lib.prepareContext = function(data){
+  return new Promise(function(fullfill,reject){
     try{
       var from = data.from | "mail";
       from = from+"@"+process.env.Host;
@@ -18,34 +20,35 @@ lib.prepareContext = (data)=>{
       reject(ex);
     }
   });
-}
+};
 
-lib.prepareTracker = (data)=>{
-  return new Promise((fullfill,reject)=>{
+lib.prepareTracker = function(data){
+  return new Promise(function(fullfill,reject){
     tracker()
-      .then((id)=>{
+      .then(function(id){
         data.trackerId = id;
         fullfill(data);
       })
       .catch(reject);
   });
-}
+};
 
-lib.prepareBody = (data)=>{
-  return new Promise((fullfill,reject)=>{
-    fs.readFile("templates/"+data.template+".tpl",'utf8',(err,content)=>{
-      if(err)
+lib.prepareBody = function(data){
+  return new Promise(function(fullfill,reject){
+    fs.readFile("templates/"+data.template+".tpl",'utf8',function(err,content){
+      if(err){
         reject(err);
+      }
       else{
         data.body = template.render(content,data.ctx);
         fullfill(data);
       }
     });
   });
-}
+};
 
-lib.prepareMail = (data)=>{
-  return new Promise((fullfill,reject)=>{
+lib.prepareMail = function(data){
+  return new Promise(function(fullfill,reject){
     try{
       var content = helper.Content("text/html",data.body);
       var mail = new helper.Mail(data.from_email,data.subject,data.to_email,content);
@@ -59,16 +62,19 @@ lib.prepareMail = (data)=>{
       reject(ex);
     }
   });
-}
+};
 
-lib.sendMail = (data)=>{
-  return new Promise((fullfill,reject)=>{
-    sg.API(data,(err,response)=>{
-      if(err) reject(err);
-      else
+lib.sendMail = function(data){
+  return new Promise(function(fullfill,reject){
+    sg.API(data,function(err,response){
+      if(err) {
+        reject(err);
+      }
+      else{
         fullfill(response);
+      }
     });
   });
-}
+};
 
 module.exports = lib;

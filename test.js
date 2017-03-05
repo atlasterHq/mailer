@@ -1,4 +1,4 @@
-const mailer = require('./mailer');
+var mailer = require('./mailer');
 
 
 var ctx = {};
@@ -7,10 +7,10 @@ ctx.from = "test";
 ctx.template = "signup";
 ctx.token = "dummy";
 mailer(ctx,'high',5)
-  .then((data)=>{
+  .then(function(data){
     console.log(data);
   })
-  .catch((err)=>{
+  .catch(function(err){
     console.log(err);
     process.exit(1);
   });
