@@ -1,5 +1,6 @@
 var kue = require('kue'),
   queue   = kue.createQueue();
+var Promise = global.promise;
 
 module.exports = function(context,priority,attempts){
   return new Promise(function(fullfill,reject){
