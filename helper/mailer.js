@@ -8,7 +8,8 @@ var lib = {};
 lib.prepareContext = (data)=>{
   return new Promise((fullfill,reject)=>{
     try{
-      var from = data.from | "mail@atlaster.co";
+      var from = data.from | "mail";
+      from = from+"@"+process.env.Host;
       data.from_email = new helper.Email(from);
       data.to_email = new helper.Email(data.to);
       fullfill(data);
