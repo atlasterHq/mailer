@@ -7,8 +7,7 @@ module.exports = (context,priority,attempts)=>{
       .priority(priority)
       .attempts(attempts)
       .backoff({type: 'exponential'})
-      .save()
-      .then(fullfill)
-      .catch(reject);
+      .save();
+    fullfill();
   });
 };

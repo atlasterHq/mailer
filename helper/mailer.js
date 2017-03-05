@@ -61,7 +61,7 @@ lib.prepareMail = (data)=>{
   });
 }
 
-lib.send = (data)=>{
+lib.sendMail = (data)=>{
   return new Promise((fullfill,reject)=>{
     sg.API(data,(err,response)=>{
       if(err) reject(err);

@@ -3,12 +3,14 @@ const mailer = require('../helper/mailer');
 const kue = require('kue'),
   queue   = kue.createQueue();
 
+console.log("Starting server");
 queue.process('email',(job,done)=>{
+  console.log(job.data);
   mailer
     .prepareContext(job.data)
     .then(mailer.prepareTracker)
     .then(mailer.prepareMail)
-    .then(mail.send)
+    .then(mailer.sendMail)
     .then((data)=>{
       console.log(data);
     })
