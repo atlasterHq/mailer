@@ -1,13 +1,17 @@
-const kue = require('kue'),
+var kue = require('kue'),
   queue   = kue.createQueue();
 
-module.exports = (context,priority,attempts)=>{
-  return new Promise((fullfill,reject)=>{
-    queue.create('email',context)
-      .priority(priority)
-      .attempts(attempts)
-      .backoff({type: 'exponential'})
-      .save();
-    fullfill();
+module.exports = function(context,priority,attempts){
+  return new Promise(function(fullfill,reject){
+    try{
+      queue.create('email',context)
+        .priority(priority)
+        .attempts(attempts)
+        .backoff({type: 'exponential'})
+        .save();
+      fullfill();
+    }catch(err){
+      reject(err);
+    }
   });
 };
