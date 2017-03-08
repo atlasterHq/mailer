@@ -4,17 +4,17 @@ var fs = require('fs');
 var sg = require('sendgrid')(process.env.SendgridApi);
 var tracker = require('trackit');
 
-var Promise = global.promise;
+var Promise = global.Promise;
 
 var lib = {};
 
 lib.prepareContext = function(data){
   return new Promise(function(fullfill,reject){
     try{
-      var from = data.from | "mail";
-      from = from+"@"+process.env.Host;
-      data.from_email = new helper.Email(from);
-      data.to_email = new helper.Email(data.to);
+      var from_mail = data.from+"@"+process.env.Host;
+      data.from_email = new helper.Email(from_mail);
+      data.to_email = new helper.Email(data.to_email);
+      console.log(data);
       fullfill(data);
     }catch(ex){
       reject(ex);

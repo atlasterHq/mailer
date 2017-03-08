@@ -8,14 +8,14 @@ queue.process('email',(job,done)=>{
   console.log(job.data);
   mailer
     .prepareContext(job.data)
-    .then(mailer.prepareTracker)
+    .then(mailer.prepareBody)
     .then(mailer.prepareMail)
     .then(mailer.sendMail)
     .then((data)=>{
       console.log(data);
     })
     .catch((err)=>{
-      console.log(err);
+      console.log(err.message);
     });
 });
 

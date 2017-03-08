@@ -1,1 +1,1 @@
-<h1>Hello {{username}}</h1>
+<a href="http://atlaster.co/verify/{{verification}}">Click here</a> to verify your account.
