@@ -4,7 +4,7 @@ const kue = require('kue'),
   queue   = kue.createQueue();
 
 console.log("Starting server");
-queue.process('email',function(job,done){
+queue.process('email',2,function(job,done){
   console.log(job.data);
   mailer
     .prepareContext(job.data)
