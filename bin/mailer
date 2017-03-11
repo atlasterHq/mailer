@@ -12,7 +12,7 @@ queue.process('email',(job,done)=>{
     .then(mailer.prepareMail)
     .then(mailer.sendMail)
     .then((data)=>{
-      console.log(data);
+      console.log("Mail sent");
     })
     .catch((err)=>{
       console.log(err.message);

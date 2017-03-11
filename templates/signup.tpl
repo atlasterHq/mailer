@@ -1,1 +1,1 @@
-<a href="http://atlaster.co/verify/{{verification}}">Click here</a> to verify your account.
+<a href="http://localhost:4200/verify/{{verification}}">Click here</a> to verify your account.

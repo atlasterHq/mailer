@@ -14,7 +14,6 @@ lib.prepareContext = function(data){
       var from_mail = data.from+"@"+process.env.Host;
       data.from_email = new helper.Email(from_mail);
       data.to_email = new helper.Email(data.to_email);
-      console.log(data);
       fullfill(data);
     }catch(ex){
       reject(ex);
@@ -41,6 +40,7 @@ lib.prepareBody = function(data){
       }
       else{
         data.body = template.render(content,data.ctx);
+        console.log(data.body);
         fullfill(data);
       }
     });
