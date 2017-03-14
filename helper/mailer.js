@@ -40,7 +40,6 @@ lib.prepareBody = function(data){
       }
       else{
         data.body = template.render(content,data.ctx);
-        console.log(data.body);
         fullfill(data);
       }
     });
