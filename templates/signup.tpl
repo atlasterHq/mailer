@@ -1,1 +1,1 @@
-<a href="http://{{env.Host}}/verify/{{verification}}?email={{email}}">Click here</a> to verify your account.
+<a href="http://{{env.webHost}}/verify/{{verification}}?email={{email}}">Click here</a> to verify your account.
