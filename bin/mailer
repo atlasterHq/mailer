@@ -9,7 +9,7 @@ queue.process('email',function(job,done){
     .prepareContext(job.data)
     .then(mailer.prepareBody)
     .then(mailer.prepareMail)
-    //.then(mailer.sendMail)
+    .then(mailer.sendMail)
     .then((data)=>{
       console.log( 'Job %s got queued of type %s', job.id, job.type );
       done();
