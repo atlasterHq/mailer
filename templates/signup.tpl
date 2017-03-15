@@ -1,1 +1,1 @@
-<a href="http://localhost:4200/verify/{{verification}}">Click here</a> to verify your account.
+<a href="http://{{env.Host}}/verify/{{verification}}?email={{email}}">Click here</a> to verify your account.

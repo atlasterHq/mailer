@@ -39,7 +39,9 @@ lib.prepareBody = function(data){
         reject(err);
       }
       else{
+        data.ctx.env = process.env;
         data.body = template.render(content,data.ctx);
+        console.log(data.body);
         fullfill(data);
       }
     });

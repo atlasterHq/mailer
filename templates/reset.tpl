@@ -1,1 +1,1 @@
-<a href="http://localhost:4200/reset/{{verification}}">Click here</a> to reset password.
+<a href="http://{{env.Host}}/reset/{{verification}}?email={{email}}">Click here</a> to reset password.
