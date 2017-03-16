@@ -3,8 +3,10 @@ const mailer = require('../helper/mailer');
 const kue = require('kue'),
   queue   = kue.createQueue();
 
+var tasks = parseInt(process.env.Tasks,10);
+
 console.log("Starting server");
-queue.process('email',function(job,done){
+queue.process('email',tasks,function(job,done){
   mailer
     .prepareContext(job.data)
     .then(mailer.prepareBody)
